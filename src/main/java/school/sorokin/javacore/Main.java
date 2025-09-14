@@ -6,9 +6,10 @@ import java.util.Scanner;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final int presentYear = 2025;
+    private static final int PRESENT_YEAR = 2025;
     private static final int startYear = 1500;
     private static final Library library = new Library();
+    private static final String INVALID_MESSAGE = "Invalid %s try again.\n";
 
     public static void main(String[] args) {
         while (true) {
@@ -20,18 +21,10 @@ public class Main {
                             "1. Book 2. Magazine 3. Newspaper");
                     String type = scanner.nextLine();
                     switch (type) {
-                        case "1" -> {
-                            createBook();
-                        }
-                        case "2" -> {
-                            createMagazine();
-                        }
-                        case "3" -> {
-                            createNewspaper();
-                        }
-                        default -> {
-                            System.out.println("Invalid input. Try again.");
-                        }
+                        case "1" -> createBook();
+                        case "2" -> createMagazine();
+                        case "3" -> createNewspaper();
+                        default -> System.out.println("Invalid input. Try again.");
                     }
                 }
                 case "2" -> {
@@ -69,7 +62,7 @@ public class Main {
         System.out.printf("Enter %s : ", nameOfField);
         while (true) {
             String name = scanner.nextLine().trim();
-            if (!name.isEmpty() && name != null) {
+            if (!name.isEmpty()) {
                 return name;
             } else {
                 System.out.printf("Invalid %s try again.\n", nameOfField);
@@ -78,17 +71,17 @@ public class Main {
     }
 
     //get common field for Publication
-    private static List<String> baseField() {
+    private static List<String> addBaseField() {
         List<String> fields = new ArrayList<>();
         fields.add(validName("title"));
         fields.add(validName("author"));
         while (true) {
             Integer year = validateNumber("year");
-            if (startYear <= year && year <= presentYear) {
+            if (startYear <= year && year <= PRESENT_YEAR) {
                 fields.add(String.valueOf(year));
                 break;
             } else {
-                System.out.printf("The year is out of range '%d-%d' try again.\n", startYear, presentYear);
+                System.out.printf("The year is out of range '%d-%d' try again.\n", startYear, PRESENT_YEAR);
             }
         }
         return fields;
@@ -102,7 +95,7 @@ public class Main {
             try {
                 return Integer.parseInt(number);
             } catch (NumberFormatException e) {
-                System.out.printf("Invalid %s try again.\n", nameOfField);
+                System.out.printf(INVALID_MESSAGE, nameOfField);
             }
         }
     }
@@ -116,14 +109,14 @@ public class Main {
                 Enum.valueOf(Days.class, day.toUpperCase());
                 return day;
             } catch (Exception e) {
-                System.out.printf("Invalid %s try again.\n", nameOfField);
+                System.out.printf(INVALID_MESSAGE, nameOfField);
             }
         }
     }
 
     //create Book
     private static void createBook() {
-        List<String> publicationField = baseField();
+        List<String> publicationField = addBaseField();
         Book book = new Book(
                 publicationField.get(0),
                 publicationField.get(1),
@@ -136,7 +129,7 @@ public class Main {
 
     //crete Magazine
     private static void createMagazine() {
-        List<String> publicationField = baseField();
+        List<String> publicationField = addBaseField();
         Magazine magazine = new Magazine(
                 publicationField.get(0),
                 publicationField.get(1),
@@ -149,7 +142,7 @@ public class Main {
 
     //create Newspaper
     private static void createNewspaper() {
-        List<String> publicationField = baseField();
+        List<String> publicationField = addBaseField();
         Newspaper newspaper = new Newspaper(
                 publicationField.get(0),
                 publicationField.get(1),

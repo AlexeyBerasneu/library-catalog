@@ -3,19 +3,19 @@ package school.sorokin.javacore;
 import java.util.Objects;
 
 public class Book extends Publication implements Printable {
-    private String ISBN;
+    private String isbn;
 
-    public Book(String title, String author, int year, String ISBN) {
+    public Book(String title, String author, int year, String isbn) {
         super(title, author, year);
-        this.ISBN = ISBN;
+        this.isbn = isbn;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public String getisbn() {
+        return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setisbn(String isbn) {
+        this.isbn = isbn;
     }
 
     @Override
@@ -26,24 +26,25 @@ public class Book extends Publication implements Printable {
 
     @Override
     public void printDetails() {
-        System.out.println("ISBN: " + ISBN);
+        System.out.println(getType());
         printPublication();
+        System.out.println("isbn: " + isbn);
     }
 
     @Override
     public String toString() {
-        return "Book{" + super.toString() + ", ISBN='" + ISBN + '\'' + '}';
+        return "Book{" + super.toString() + ", isbn='" + isbn + '\'' + '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Book book)) return false;
         if (!super.equals(o)) return false;
-        return Objects.equals(ISBN, book.ISBN);
+        return Objects.equals(isbn, book.isbn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), ISBN);
+        return Objects.hash(super.hashCode(), isbn);
     }
 }

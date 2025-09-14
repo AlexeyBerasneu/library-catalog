@@ -19,10 +19,14 @@ public class Library {
     }
 
     public void listPublications() {
-        if (this.publications.size() > 0) {
+        if (!this.publications.isEmpty()) {
             System.out.println("List of publications: ");
             for (Publication pub : this.publications) {
-                castPublication(pub);
+                if (pub instanceof Printable printable) {
+                    printable.printDetails();
+                } else {
+                    System.out.println(pub);
+                }
             }
         } else {
             System.out.println("Publication is empty.");

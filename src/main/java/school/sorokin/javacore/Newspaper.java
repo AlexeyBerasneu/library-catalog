@@ -3,7 +3,7 @@ package school.sorokin.javacore;
 import java.util.Objects;
 
 public class Newspaper extends Publication implements Printable {
-    private String publicationDay;
+    private final String publicationDay;
 
     public Newspaper(String title, String author, int year, String publicationDay) {
         super(title, author, year);

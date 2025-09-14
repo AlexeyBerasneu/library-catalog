@@ -8,7 +8,7 @@ public abstract class Publication {
     private int year;
     private static int publicationCount = 0;
 
-    public Publication(String title, String author, int year) {
+    protected Publication(String title, String author, int year) {
         this.title = title;
         this.author = author;
         this.year = year;
@@ -45,7 +45,7 @@ public abstract class Publication {
         this.year = year;
     }
 
-    public void printPublication(){
+    public void printPublication() {
         System.out.println("Title: " + title);
         System.out.println("Author: " + author);
         System.out.println("Year: " + year);
@@ -66,6 +66,6 @@ public abstract class Publication {
     public String toString() {
         return "title='" + title + '\'' +
                 ", author='" + author + '\'' +
-                ", year=" + year    ;
+                ", year=" + year;
     }
 }
